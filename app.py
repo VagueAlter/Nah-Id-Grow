@@ -164,18 +164,18 @@ with tab3:
     # === METRIK UTAMA
     report = metrics["classification_report"]
     st.markdown("### 📌 Classification Report")
-    st.write(pd.DataFrame(report).transpose())
+    report_df = pd.DataFrame(report).transpose()
+    st.dataframe(report_df, use_container_width=True)
 
     # === CONFUSION MATRIX
     st.markdown("### ❗ Confusion Matrix")
     cm = np.array(metrics["confusion_matrix"])
     cm_df = pd.DataFrame(cm, index=["Tidak Layak", "Layak"], columns=["Pred: Tidak Layak", "Pred: Layak"])
-    st.dataframe(cm_df)
+    st.dataframe(cm_df, use_container_width=True)
 
     # === FEATURE IMPORTANCE
     st.markdown("### 🌟 Feature Importance (Random Forest)")
     importance = pd.Series(metrics["feature_importance"], index=features).sort_values(ascending=True)
-
     st.bar_chart(importance)
 
     # === KMeans Metrics
